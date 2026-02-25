@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SuryaNet – Smart Solar Mirror Network of India</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ============ TOP BAR ============ -->
+  <div class="topbar">
+    <div class="brand">
+      <img src="assets/logo.svg" class="logo" alt="SuryaNet logo">
+      <div>
+        <h1>SuryaNet</h1>
+        <p class="tag">Smart Solar Mirror Network of India</p>
+      </div>
+    </div>
+    <nav>
+      <button class="btn" onclick="document.getElementById('intro').scrollIntoView({behavior:'smooth'})">Home</button>
+      <button class="btn" onclick="document.getElementById('dashboard').scrollIntoView({behavior:'smooth'})">Dashboard</button>
+      <button class="btn" onclick="document.getElementById('map').scrollIntoView({behavior:'smooth'})">Map</button>
+      <button class="btn" onclick="document.getElementById('fridge').scrollIntoView({behavior:'smooth'})">Solar Fridge</button>
+      <button class="btn" onclick="document.getElementById('polyhouse').scrollIntoView({behavior:'smooth'})">Polyhouse</button>
+      <button class="btn" onclick="document.getElementById('aim').scrollIntoView({behavior:'smooth'})">Aim</button>
+      <button class="btn" onclick="document.getElementById('problems').scrollIntoView({behavior:'smooth'})">Problems</button>
+      <label class="switch">
+        <input type="checkbox" id="nightToggle" onclick="toggleNight()">
+        <span class="slider"></span>
+      </label>
+      <span style="font-size:12px;margin-left:6px;">Night Mode</span>
+    </nav>
+  </div>
+
+  <!-- ============ MAIN CONTAINER ============ -->
+  <div class="container">
+
+    <!-- ============ INTRODUCTION SECTION ============ -->
+    <section id="intro" class="card intro-section">
+      <h2 style="color:#ffd43b;margin-top:0;font-size:28px;">🌟 Welcome to SuryaNet</h2>
+      <p style="font-size:16px;color:rgba(234,246,255,0.9);line-height:1.6;">
+        <strong>SuryaNet</strong> is an innovative renewable energy project designed to use India's abundant sunlight efficiently through a smart solar mirror network. The system consists of more than 30 strategically placed mirror stations across India that can reflect or absorb sunlight depending on operational needs.
+      </p>
+      <p style="font-size:15px;color:rgba(234,246,255,0.8);line-height:1.6;">
+        This project aims to support agriculture, reduce carbon emissions, and create a sustainable energy support system for remote and shaded regions, transforming India into a beacon of renewable energy innovation.
+      </p>
+      <div style="display:flex;gap:12px;margin-top:16px;flex-wrap:wrap;">
+        <div style="background:rgba(255,212,59,0.1);padding:12px;border-radius:8px;flex:1;min-width:120px;border-left:3px solid #ffd43b;">
+          <div style="font-size:24px;font-weight:bold;color:#ffd43b;">30+</div>
+          <div style="font-size:12px;color:rgba(234,246,255,0.7);">Mirror Stations</div>
+        </div>
+        <div style="background:rgba(77,192,255,0.1);padding:12px;border-radius:8px;flex:1;min-width:120px;border-left:3px solid #4dc0ff;">
+          <div style="font-size:24px;font-weight:bold;color:#4dc0ff;">28+ States</div>
+          <div style="font-size:12px;color:rgba(234,246,255,0.7);">Coverage Area</div>
+        </div>
+        <div style="background:rgba(255,212,59,0.1);padding:12px;border-radius:8px;flex:1;min-width:120px;border-left:3px solid #ffd43b;">
+          <div style="font-size:24px;font-weight:bold;color:#ffd43b;">99%</div>
+          <div style="font-size:12px;color:rgba(234,246,255,0.7);">Efficiency Rate</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ DASHBOARD SECTION ============ -->
+    <section id="dashboard" class="card dashboard-section">
+      <h2 style="color:#4dc0ff;margin-top:0;">📊 Live Dashboard</h2>
+      
+      <div class="dashboard-grid">
+        <div class="dash-card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="color:rgba(234,246,255,0.9);font-weight:600;">☀️ Sunlight Level</span>
+            <span style="font-size:24px;font-weight:bold;color:#ffd43b;"><span id="sunLevel">78</span>%</span>
+          </div>
+          <div class="meter">
+            <div class="meter-bar" id="sunMeter" style="width:78%;"></div>
+          </div>
+          <div style="font-size:11px;color:rgba(234,246,255,0.6);margin-top:4px;">Current sunlight intensity</div>
+        </div>
+
+        <div class="dash-card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="color:rgba(234,246,255,0.9);font-weight:600;">🔋 Energy Storage</span>
+            <span style="font-size:24px;font-weight:bold;color:#4dc0ff;"><span id="batteryLevel">62</span>%</span>
+          </div>
+          <div class="meter">
+            <div class="meter-bar blue" id="batteryMeter" style="width:62%;"></div>
+          </div>
+          <div style="font-size:11px;color:rgba(234,246,255,0.6);margin-top:4px;">Battery backup charged</div>
+        </div>
+
+        <div class="dash-card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="color:rgba(234,246,255,0.9);font-weight:600;">🛰️ Active Stations</span>
+            <span style="font-size:24px;font-weight:bold;color:#ffd43b;"><span id="stationCount">32</span></span>
+          </div>
+          <div style="font-size:11px;color:rgba(234,246,255,0.6);margin-top:8px;">All stations operational</div>
+        </div>
+
+        <div class="dash-card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="color:rgba(234,246,255,0.9);font-weight:600;">🌍 Operating Mode</span>
+            <span id="modeLabel" style="font-size:14px;font-weight:bold;color:#4dc0ff;background:rgba(77,192,255,0.2);padding:4px 8px;border-radius:4px;">Reflection Mode</span>
+          </div>
+          <label class="switch" style="margin-top:4px;">
+            <input type="checkbox" id="modeToggle" onchange="toggleMode()">
+            <span class="slider"></span>
+          </label>
+          <div style="font-size:11px;color:rgba(234,246,255,0.6);margin-top:4px;">Switch between modes</div>
+        </div>
+      </div>
+
+      <div style="margin-top:16px;padding:12px;background:rgba(77,192,255,0.08);border-radius:8px;border-left:3px solid #4dc0ff;">
+        <p style="margin:0;font-size:13px;color:rgba(234,246,255,0.85);">
+          <strong>💡 Reflection Mode:</strong> Mirrors redirect sunlight to shaded agricultural areas, creating a reflection chain across India.
+        </p>
+        <p style="margin:8px 0 0 0;font-size:13px;color:rgba(234,246,255,0.85);">
+          <strong>⚡ Absorption Mode:</strong> Solar panels absorb sunlight and convert it to electrical energy stored in batteries for night usage.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ NIGHT MODE SECTION ============ -->
+    <section class="card night-mode-section" style="background:linear-gradient(180deg,rgba(20,10,40,0.3),rgba(10,5,25,0.3));border:1px solid rgba(147,51,234,0.2);">
+      <h2 style="color:#b78dff;margin-top:0;">🌙 Night Mode – Artificial Sunlight</h2>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:250px;">
+          <p style="color:rgba(234,246,255,0.85);font-size:14px;line-height:1.6;">
+            During nighttime, <strong>SuryaNet</strong> switches to its stored solar energy mode. High-intensity LED grow lights (powered by daytime-stored energy) illuminate greenhouse farms, allowing continuous agricultural production even during darkness.
+          </p>
+          <ul style="font-size:13px;color:rgba(234,246,255,0.8);line-height:1.8;">
+            <li>✅ LED grow lights powered by stored solar energy</li>
+            <li>✅ Greenhouse temperature monitoring</li>
+            <li>✅ Extends agricultural growing season</li>
+            <li>✅ Supports 24/7 farming operations</li>
+          </ul>
+        </div>
+        <div style="flex:1;min-width:250px;background:rgba(147,51,234,0.1);padding:12px;border-radius:8px;border:1px solid rgba(147,51,234,0.3);">
+          <div style="text-align:center;padding:20px;">
+            <div style="font-size:48px;margin-bottom:8px;">💡</div>
+            <div style="font-size:13px;color:rgba(234,246,255,0.85);">
+              <strong>Energy Efficiency</strong><br>
+              <span style="color:rgba(234,246,255,0.7);">Stored energy provides 8-12 hours of artificial sunlight illumination per day</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MAP SECTION ============ -->
+    <section id="map" class="card map-area">
+      <h2 style="color:#4dc0ff;margin-top:0;">🗺️ Solar Mirror Network Across India</h2>
+      <p style="color:rgba(234,246,255,0.7);font-size:13px;margin:8px 0 12px 0;">30+ strategically placed solar mirror stations spanning mountain regions of Arunachal Pradesh, Himachal Pradesh, Ladakh, Uttarakhand, and Meghalaya</p>
+      <div class="map-wrap">
+        <svg class="india-svg" viewBox="0 0 1000 1200" xmlns="http://www.w3.org/2000/svg">
+          <!-- India Map with Major States -->
+          <defs>
+            <linearGradient id="mapGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:rgba(77,192,255,0.12);stop-opacity:1" />
+              <stop offset="100%" style="stop-color:rgba(255,212,59,0.08);stop-opacity:1" />
+            </linearGradient>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+          
+          <!-- Simplified India boundary -->
+          <path d="M 150 200 L 280 150 L 420 160 L 500 140 L 600 170 L 700 200 L 750 250 L 800 320 L 850 450 L 820 600 L 750 700 L 600 750 L 450 800 L 300 820 L 200 750 L 150 600 L 120 450 L 140 300 Z" 
+                fill="url(#mapGrad)" stroke="rgba(77,192,255,0.4)" stroke-width="2.5"/>
+          
+          <!-- Major Mountain Regions (colored highlight) -->
+          <text x="320" y="250" font-size="14" font-weight="600" fill="rgba(255,212,59,0.6)">Himachal</text>
+          <text x="420" y="180" font-size="14" font-weight="600" fill="rgba(255,212,59,0.6)">Arunachal</text>
+          <text x="500" y="120" font-size="14" font-weight="600" fill="rgba(77,192,255,0.6)">Ladakh</text>
+          <text x="280" y="380" font-size="13" font-weight="500" fill="rgba(234,246,255,0.5)">Uttarakhand</text>
+          <text x="600" y="450" font-size="13" font-weight="500" fill="rgba(234,246,255,0.5)">Meghalaya</text>
+          <text x="420" y="700" font-size="13" font-weight="500" fill="rgba(234,246,255,0.5)">Deccan Plateau</text>
+          
+          <!-- Connection lines (rendered by JS) -->
+          <g id="connections"></g>
+          <!-- Marker area for stations -->
+          <g id="markers"></g>
+        </svg>
+      </div>
+      <div class="map-legend" style="display:flex;gap:12px;margin-top:12px;align-items:center;flex-wrap:wrap;">
+        <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.02);padding:8px;border-radius:8px;border-left:3px solid #ffd43b;">
+          <div style="font-size:18px;">☀️</div>
+          <div style="font-size:12px;color:rgba(234,246,255,0.8);">Sunlight Level</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.02);padding:8px;border-radius:8px;border-left:3px solid #4dc0ff;">
+          <div style="font-size:18px;">🔋</div>
+          <div style="font-size:12px;color:rgba(234,246,255,0.8);">Battery / Storage</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.02);padding:8px;border-radius:8px;border-left:3px solid #b78dff;">
+          <div style="font-size:18px;">🪞</div>
+          <div style="font-size:12px;color:rgba(234,246,255,0.8);">Mirror Station</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.02);padding:8px;border-radius:8px;border-left:3px solid #66d0ff;">
+          <div style="font-size:18px;">🏞️</div>
+          <div style="font-size:12px;color:rgba(234,246,255,0.8);">Mountain / Valley</div>
+        </div>
+      </div>
+      <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;font-size:12px;">
+        <div style="background:rgba(255,212,59,0.1);padding:8px;border-radius:6px;border-left:2px solid #ffd43b;">
+          <strong style="color:#ffd43b;">Arunachal Pradesh</strong><br><span style="color:rgba(234,246,255,0.6);">5 Stations</span>
+        </div>
+        <div style="background:rgba(255,212,59,0.1);padding:8px;border-radius:6px;border-left:2px solid #ffd43b;">
+          <strong style="color:#ffd43b;">Himachal Pradesh</strong><br><span style="color:rgba(234,246,255,0.6);">8 Stations</span>
+        </div>
+        <div style="background:rgba(255,212,59,0.1);padding:8px;border-radius:6px;border-left:2px solid #ffd43b;">
+          <strong style="color:#ffd43b;">Ladakh</strong><br><span style="color:rgba(234,246,255,0.6);">7 Stations</span>
+        </div>
+        <div style="background:rgba(77,192,255,0.1);padding:8px;border-radius:6px;border-left:2px solid #4dc0ff;">
+          <strong style="color:#4dc0ff;">Uttarakhand</strong><br><span style="color:rgba(234,246,255,0.6);">6 Stations</span>
+        </div>
+        <div style="background:rgba(77,192,255,0.1);padding:8px;border-radius:6px;border-left:2px solid #4dc0ff;">
+          <strong style="color:#4dc0ff;">Meghalaya</strong><br><span style="color:rgba(234,246,255,0.6);">4 Stations</span>
+        </div>
+        <div style="background:rgba(77,192,255,0.1);padding:8px;border-radius:6px;border-left:2px solid #4dc0ff;">
+          <strong style="color:#4dc0ff;">Other States</strong><br><span style="color:rgba(234,246,255,0.6);">2 Stations</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SOLAR FRIDGE & ICE STORAGE SECTION ============ -->
+    <section id="fridge" class="card renewable-fridge-section" style="background:linear-gradient(135deg,rgba(255,212,59,0.08),rgba(77,192,255,0.04));border:1px solid rgba(255,212,59,0.15);">
+      <h2 style="color:#ffd43b;margin-top:0;">❄️ Solar-Powered Agricultural Fridge – Food Preservation Revolution</h2>
+      <p style="color:rgba(234,246,255,0.85);font-size:14px;line-height:1.6;margin-bottom:14px;">
+        From SuryaNet's <strong>100W+ daily power generation</strong>, we can operate solar-powered refrigeration units that preserve farm produce for months instead of days. This ice-storage fridge system enables farmers to extend crop lifespan, eliminate post-harvest waste, and unlock new market opportunities.
+      </p>
+      
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px;margin-top:14px;">
+        <!-- Fridge Tech Card -->
+        <div style="background:linear-gradient(135deg,rgba(255,212,59,0.06),rgba(255,212,59,0.02));border:1px solid rgba(255,212,59,0.2);border-radius:10px;padding:14px;">
+          <div style="font-size:28px;margin-bottom:8px;">🧊</div>
+          <h4 style="color:#ffd43b;margin:8px 0;font-size:14px;">Ice Storage Technology</h4>
+          <ul style="margin:0;padding-left:18px;font-size:12px;color:rgba(234,246,255,0.8);line-height:1.7;">
+            <li>Insulated chamber with ice packs</li>
+            <li>Maintains 0°-4°C temperature</li>
+            <li>100% renewable energy powered</li>
+            <li>Zero diesel/grid electricity needed</li>
+          </ul>
+        </div>
+        
+        <!-- Lifespan Extension Card -->
+        <div style="background:linear-gradient(135deg,rgba(77,192,255,0.06),rgba(77,192,255,0.02));border:1px solid rgba(77,192,255,0.2);border-radius:10px;padding:14px;">
+          <div style="font-size:28px;margin-bottom:8px;">📅</div>
+          <h4 style="color:#4dc0ff;margin:8px 0;font-size:14px;">Extended Crop Life</h4>
+          <div style="background:rgba(77,192,255,0.08);padding:10px;border-radius:8px;margin-top:8px;">
+            <div style="font-size:11px;color:rgba(234,246,255,0.75);margin-bottom:6px;"><strong>Before (Without Fridge):</strong> 2-3 days shelf life</div>
+            <div style="font-size:20px;font-weight:bold;color:#4dc0ff;text-align:center;margin:8px 0;">⬇️⬇️⬇️</div>
+            <div style="font-size:11px;color:rgba(234,246,255,0.75);"><strong>After (With Fridge):</strong> 60-90 days shelf life</div>
+          </div>
+          <div style="font-size:11px;color:#ffb84d;margin-top:10px;font-weight:500;">🚀 30x Lifespan Increase</div>
+        </div>
+        
+        <!-- Economic Impact Card -->
+        <div style="background:linear-gradient(135deg,rgba(147,51,234,0.06),rgba(147,51,234,0.02));border:1px solid rgba(147,51,234,0.2);border-radius:10px;padding:14px;">
+          <div style="font-size:28px;margin-bottom:8px;">💵</div>
+          <h4 style="color:#b78dff;margin:8px 0;font-size:14px;">Farmer Economic Benefits</h4>
+          <ul style="margin:0;padding-left:18px;font-size:12px;color:rgba(234,246,255,0.8);line-height:1.7;">
+            <li>Eliminate 70-80% post-harvest loss</li>
+            <li>Direct market access (longer shelf life)</li>
+            <li>Premium pricing for fresh produce</li>
+            <li>Revenue increase: ₹50,000+ annually</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- How It Works -->
+      <div style="margin-top:16px;background:rgba(255,212,59,0.06);padding:12px;border-radius:8px;border-left:3px solid #ffd43b;">
+        <h4 style="color:#ffd43b;margin:0 0 8px 0;font-size:13px;">⚡ How It Works</h4>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;font-size:12px;color:rgba(234,246,255,0.8);">
+          <div>
+            <strong style="color:#ffd43b;">1. Solar Power Collection</strong><br>
+            SuryaNet generates 100-150W during daytime through mirror reflection + solar panels
+          </div>
+          <div>
+            <strong style="color:#ffd43b;">2. Ice Production</strong><br>
+            Thermoelectric cooling creates ice packs in insulated chambers during peak sunlight
+          </div>
+          <div>
+            <strong style="color:#ffd43b;">3. Preservation at Night</strong><br>
+            Ice storage keeps produce cold for 12-24 hours through thermal mass
+          </div>
+          <div>
+            <strong style="color:#ffd43b;">4. Market Ready</strong><br>
+            Fresh, cold produce maintains quality for days—reach faraway markets
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ POLYHOUSE ARTIFICIAL LIGHT SECTION ============ -->
+    <section id="polyhouse" class="card polyhouse-section" style="background:linear-gradient(135deg,rgba(147,51,234,0.08),rgba(77,192,255,0.04));border:1px solid rgba(147,51,234,0.15);">
+      <h2 style="color:#b78dff;margin-top:0;">💡 Polyhouse Artificial Light – 24/7 Farming with Solar Power</h2>
+      <p style="color:rgba(234,246,255,0.85);font-size:14px;line-height:1.6;margin-bottom:14px;">
+        During nighttime and cloudy periods, SuryaNet-powered high-intensity LED grow lights illuminate polyhouses (greenhouse structures), enabling continuous photosynthesis and year-round crop production. Stored solar energy provides consistent illumination without fossil fuel dependency.
+      </p>
+      
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;">
+        <!-- Left: LED Specs -->
+        <div style="background:linear-gradient(135deg,rgba(147,51,234,0.08),rgba(147,51,234,0.02));border:1px solid rgba(147,51,234,0.2);border-radius:10px;padding:14px;">
+          <h4 style="color:#b78dff;margin-top:0;margin-bottom:10px;font-size:14px;">🔆 LED Grow Light System</h4>
+          <div style="font-size:12px;color:rgba(234,246,255,0.8);line-height:2;background:rgba(255,255,255,0.03);padding:10px;border-radius:8px;">
+            <strong>Light Type:</strong> Full-spectrum RED + BLUE LEDs<br/>
+            <strong>Wavelength:</strong> 380-780 nm (optimal for photosynthesis)<br/>
+            <strong>Power Draw:</strong> 50-100W per polyhouse section<br/>
+            <strong>Efficiency:</strong> 95% energy converts to plant growth<br/>
+            <strong>Operation:</strong> 12-14 hours nightly illumination<br/>
+            <strong>Temperature Control:</strong> 25-30°C optimal range
+          </div>
+        </div>
+        
+        <!-- Right: Agricultural Impact -->
+        <div style="background:linear-gradient(135deg,rgba(77,192,255,0.08),rgba(77,192,255,0.02));border:1px solid rgba(77,192,255,0.2);border-radius:10px;padding:14px;">
+          <h4 style="color:#4dc0ff;margin-top:0;margin-bottom:10px;font-size:14px;">🌱 Agricultural Growth Impact</h4>
+          <div style="font-size:12px;color:rgba(234,246,255,0.8);line-height:2;background:rgba(255,255,255,0.03);padding:10px;border-radius:8px;">
+            <strong>Crop Varieties Supported:</strong> Tomato, cucumber, lettuce, herbs, berries<br/>
+            <strong>Growth Rate Increase:</strong> 40-60% faster than natural daylight<br/>
+            <strong>Year-Round Yield:</strong> 4-5 harvests annually (vs. 1-2)<br/>
+            <strong>Water Usage:</strong> 80% less through controlled hydroponic systems<br/>
+            <strong>Disease Prevention:</strong> Controlled environment reduces pest damage<br/>
+            <strong>Quality Produce:</strong> Premium, pesticide-free organic vegetables
+          </div>
+        </div>
+      </div>
+
+      <!-- Polyhouse Layout -->
+      <div style="margin-top:14px;background:rgba(147,51,234,0.08);padding:12px;border-radius:8px;border-left:3px solid #b78dff;">
+        <h4 style="color:#b78dff;margin:0 0 10px 0;font-size:13px;">🏗️ Polyhouse Structure & LED Placement</h4>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;font-size:11px;color:rgba(234,246,255,0.8);">
+          <div style="background:rgba(255,255,255,0.02);padding:10px;border-radius:6px;border-left:2px solid #b78dff;">
+            <strong style="color:#b78dff;">Roof Structure</strong><br>
+            Polycarbonate/plastic dome (translucent for natural + artificial light blend)
+          </div>
+          <div style="background:rgba(255,255,255,0.02);padding:10px;border-radius:6px;border-left:2px solid #b78dff;">
+            <strong style="color:#b78dff;">LED Mounting</strong><br>
+            Suspended rails 1-2 meters above plant canopy; adjustable angles
+          </div>
+          <div style="background:rgba(255,255,255,0.02);padding:10px;border-radius:6px;border-left:2px solid #b78dff;">
+            <strong style="color:#b78dff;">Temperature Control</strong><br>
+            Ventilation fans + shade control during peak solar hours
+          </div>
+          <div style="background:rgba(255,255,255,0.02);padding:10px;border-radius:6px;border-left:2px solid #b78dff;">
+            <strong style="color:#b78dff;">Power Management</strong><br>
+            Smart timer for lights; battery draws down during night mode
+          </div>
+        </div>
+      </div>
+
+      <!-- Energy Cycle -->
+      <div style="margin-top:12px;padding:12px;background:linear-gradient(90deg,rgba(77,192,255,0.06),rgba(147,51,234,0.06));border-radius:8px;border-left:3px solid #4dc0ff;">
+        <h4 style="color:#4dc0ff;margin:0 0 10px 0;font-size:13px;">⚡ Daily Energy Cycle</h4>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:12px;color:rgba(234,246,255,0.8);">
+          <div style="text-align:center;">
+            <div style="font-size:24px;margin-bottom:4px;">☀️</div>
+            <div style="font-size:11px;font-weight:500;">6AM-6PM<br/>Daytime Charging</div>
+          </div>
+          <div style="font-size:20px;color:#4dc0ff;">→</div>
+          <div style="text-align:center;">
+            <div style="font-size:24px;margin-bottom:4px;">🔋</div>
+            <div style="font-size:11px;font-weight:500;">Store Energy<br/>in Batteries</div>
+          </div>
+          <div style="font-size:20px;color:#4dc0ff;">→</div>
+          <div style="text-align:center;">
+            <div style="font-size:24px;margin-bottom:4px;">🌙</div>
+            <div style="font-size:11px;font-weight:500;">6PM-6AM<br/>LED Lights ON</div>
+          </div>
+          <div style="font-size:20px;color:#4dc0ff;">→</div>
+          <div style="text-align:center;">
+            <div style="font-size:24px;margin-bottom:4px;">🌱</div>
+            <div style="font-size:11px;font-weight:500;">24/7 Photosynthesis<br/>Continuous Growth</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BENEFITS SECTION ============ -->
+    <section class="card benefits-section">
+      <h2 style="color:#4dc0ff;margin-top:0;">✨ Benefits Analysis</h2>
+      
+      <div class="benefits-problems">
+        <div class="col">
+          <h3 style="color:#ffd43b;margin-top:0;border-bottom:2px solid rgba(255,212,59,0.3);padding-bottom:8px;">💰 Economic Benefits</h3>
+          <ul style="font-size:13px;color:rgba(234,246,255,0.85);line-height:1.8;">
+            <li><strong>Reduced Electricity Costs:</strong> Farmers save on fossil fuel-based power bills</li>
+            <li><strong>Increased Agricultural Productivity:</strong> 40-50% higher crop yields in shaded areas</li>
+            <li><strong>Rural Employment:</strong> Jobs in maintenance, monitoring, and operations</li>
+            <li><strong>Export Opportunities:</strong> Premium organic produce from sustainable farming</li>
+            <li><strong>Energy Independence:</strong> Reduced reliance on centralized power grids</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h3 style="color:#4dc0ff;margin-top:0;border-bottom:2px solid rgba(77,192,255,0.3);padding-bottom:8px;">🌍 Environmental Benefits</h3>
+          <ul style="font-size:13px;color:rgba(234,246,255,0.85);line-height:1.8;">
+            <li><strong>Renewable Energy:</strong> 100% clean energy from India's abundant sunlight</li>
+            <li><strong>CO₂ Reduction:</strong> Eliminates carbon emissions from fossil fuel usage</li>
+            <li><strong>Pollution-Free Operation:</strong> Zero greenhouse gas emissions</li>
+            <li><strong>Climate Action:</strong> Contributes to India's net-zero carbon goals</li>
+            <li><strong>Ecological Balance:</strong> Supports biodiversity through sustainable farming</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROBLEMS & SOLUTIONS SECTION ============ -->
+    <section id="problems" class="card problems-section">
+      <h2 style="color:#ff6b6b;margin-top:0;">⚠️ Challenges & Smart Solutions</h2>
+      
+      <p style="background:rgba(255,107,107,0.1);padding:12px;border-radius:8px;border-left:3px solid #ff6b6b;color:rgba(234,246,255,0.85);font-size:13px;line-height:1.6;margin-bottom:16px;">
+        <strong>The Problem:</strong> Many mountainous areas in India suffer from severe sunlight deficiency due to geographic terrain, resulting in agricultural underproduction. Forced to depend on fossil fuel-based electricity, these regions account for significant CO₂ emissions. There's a critical need for sustainable rural energy solutions and modern agricultural support systems.
+      </p>
+      <p style="background:rgba(255,107,107,0.06);padding:10px;border-radius:8px;border-left:3px solid rgba(255,107,107,0.12);color:rgba(234,246,255,0.8);font-size:13px;line-height:1.5;margin-bottom:8px;">
+        In many high-altitude and mountain pockets, direct sunlight is often blocked by surrounding peaks and terrain. These areas traditionally rely on diesel or grid electricity — increasing local CO₂ emissions and hampering sustainable agriculture. SuryaNet aims to bridge this gap by reflecting sunlight into shaded valleys and integrating battery-backed greenhouse lighting to reduce fossil fuel dependence and lower carbon footprints.
+      </p>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;">
+        
+        <div style="background:rgba(255,107,107,0.08);border:1px solid rgba(255,107,107,0.2);padding:12px;border-radius:8px;">
+          <div style="color:#ff6b6b;font-weight:bold;margin-bottom:6px;font-size:14px;">☁️ Weather Dependency</div>
+          <p style="margin:0;font-size:12px;color:rgba(234,246,255,0.75);margin-bottom:8px;">
+            Cloud cover and rainfall reduce direct sunlight interception
+          </p>
+          <div style="background:rgba(76,192,50,0.15);padding:8px;border-radius:6px;border-left:2px solid #4cc032;">
+            <strong style="color:#4cc032;font-size:12px;">✓ Solution:</strong>
+            <p style="margin:4px 0 0 0;font-size:11px;color:rgba(234,246,255,0.7);">
+              Advanced battery backup systems with 8-12 hour autonomy; AI-based cloud tracking for optimized mirror angles
+            </p>
+          </div>
+        </div>
+
+        <div style="background:rgba(255,107,107,0.08);border:1px solid rgba(255,107,107,0.2);padding:12px;border-radius:8px;">
+          <div style="color:#ff6b6b;font-weight:bold;margin-bottom:6px;font-size:14px;">💸 High Installation Cost</div>
+          <p style="margin:0;font-size:12px;color:rgba(234,246,255,0.75);margin-bottom:8px;">
+            Initial infrastructure setup requires significant investment
+          </p>
+          <div style="background:rgba(76,192,50,0.15);padding:8px;border-radius:6px;border-left:2px solid #4cc032;">
+            <strong style="color:#4cc032;font-size:12px;">✓ Solution:</strong>
+            <p style="margin:4px 0 0 0;font-size:11px;color:rgba(234,246,255,0.7);">
+              Phased implementation starting with high-priority regions; government subsidies and green financing; long-term ROI through reduced electricity costs
+            </p>
+          </div>
+        </div>
+
+        <div style="background:rgba(255,107,107,0.08);border:1px solid rgba(255,107,107,0.2);padding:12px;border-radius:8px;">
+          <div style="color:#ff6b6b;font-weight:bold;margin-bottom:6px;font-size:14px;">🔧 Maintenance Requirements</div>
+          <p style="margin:0;font-size:12px;color:rgba(234,246,255,0.75);margin-bottom:8px;">
+            Dust, dirt, and environmental damage require regular upkeep
+          </p>
+          <div style="background:rgba(76,192,50,0.15);padding:8px;border-radius:6px;border-left:2px solid #4cc032;">
+            <strong style="color:#4cc032;font-size:12px;">✓ Solution:</strong>
+            <p style="margin:4px 0 0 0;font-size:11px;color:rgba(234,246,255,0.7);">
+              Protective mirror coatings; automated cleaning systems; quarterly maintenance schedules; IoT-based monitoring for predictive maintenance
+            </p>
+          </div>
+        </div>
+
+        <div style="background:rgba(255,107,107,0.08);border:1px solid rgba(255,107,107,0.2);padding:12px;border-radius:8px;">
+          <div style="color:#ff6b6b;font-weight:bold;margin-bottom:6px;font-size:14px;">🛡️ Security & Sensitive Locations</div>
+          <p style="margin:0;font-size:12px;color:rgba(234,246,255,0.75);margin-bottom:8px;">
+            Some high-altitude areas are strategically sensitive
+          </p>
+          <div style="background:rgba(76,192,50,0.15);padding:8px;border-radius:6px;border-left:2px solid #4cc032;">
+            <strong style="color:#4cc032;font-size:12px;">✓ Solution:</strong>
+            <p style="margin:4px 0 0 0;font-size:11px;color:rgba(234,246,255,0.7);">
+              Government coordination and approval; collaboration with border authorities; secure surveillance systems; compliance with national security protocols
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ THE AIM SECTION ============ -->
+    <section id="aim" class="card aim-section">
+      <h2 style="color:#ffd43b;margin-top:0;font-size:24px;">🎯 THE AIM</h2>
+      <p style="color:rgba(234,246,255,0.85);font-size:14px;line-height:1.7;margin-bottom:16px;">
+        The main aim of our project is to efficiently supply sunlight to the mountain areas of India through an intelligent mirror system. This creates a reflection chain around India while supporting greenhouse agriculture in shaded regions, reducing fossil fuel dependency, and promoting renewable energy innovation at scale.
+      </p>
+
+      <table class="aim-table">
+        <tr style="background:rgba(255,212,59,0.15);">
+          <th style="color:#ffd43b;">🎯 Objective</th>
+          <th style="color:#4dc0ff;">📋 Description</th>
+          <th style="color:#b78dff;">💡 Impact</th>
+        </tr>
+        <tr>
+          <td style="color:#ffd43b;font-weight:600;">☀️ Efficient Sunlight Supply</td>
+          <td>Deliver direct/reflected sunlight to mountain regions currently facing light deficiency</td>
+          <td>Enable agriculture in previously unsuitable areas; +60-80% light exposure increase</td>
+        </tr>
+        <tr style="background:rgba(255,255,255,0.02);">
+          <td style="color:#4dc0ff;font-weight:600;">🔗 Reflection Chain</td>
+          <td>Create a connected mirror network spanning multiple states, forming a reflection corridor</td>
+          <td>Rapid light transmission (near-instantaneous); covers entire mountain ranges</td>
+        </tr>
+        <tr>
+          <td style="color:#b78dff;font-weight:600;">🌱 Greenhouse Support</td>
+          <td>Enable 24/7 greenhouse agriculture through reflected light + LED night farming</td>
+          <td>40-50% crop yield increase; year-round farming in shaded valleys</td>
+        </tr>
+        <tr style="background:rgba(255,255,255,0.02);">
+          <td style="color:#ffd43b;font-weight:600;">⚡ Reduce Fossil Fuels</td>
+          <td>Shift from coal/diesel-based electricity to renewable solar energy</td>
+          <td>Eliminate tons of CO₂ emissions annually; cleaner air and climate</td>
+        </tr>
+        <tr>
+          <td style="color:#4dc0ff;font-weight:600;">🚀 Renewable Innovation</td>
+          <td>Establish India as a global leader in solar reflection technology and green energy</td>
+          <td>International recognition; technology licensing; green job creation (10,000+ jobs)</td>
+        </tr>
+      </table>
+    </section>
+
+    <!-- ============ SCIENTIFIC PRINCIPLES SECTION ============ -->
+    <section class="card science-section">
+      <h2 style="color:#4dc0ff;margin-top:0;">🔬 Scientific Foundation</h2>
+      
+      <div style="background:rgba(77,192,255,0.1);padding:14px;border-radius:8px;border-left:3px solid #4dc0ff;margin-bottom:14px;">
+        <h3 style="margin-top:0;color:#4dc0ff;">Law of Reflection</h3>
+        <p style="margin:8px 0;font-size:13px;color:rgba(234,246,255,0.85);font-style:italic;">
+          <strong>Angle of Incidence = Angle of Reflection</strong>
+        </p>
+        <p style="margin:8px 0;font-size:13px;color:rgba(234,246,255,0.8);">
+          When sunlight strikes a plane mirror at an angle, it reflects at an equal angle. By positioning mirrors strategically in high-altitude locations, sunlight can be directed from one station to another in a chain formation, covering vast distances with nearly instantaneous light transmission.
+        </p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;">
+        <div style="background:rgba(255,212,59,0.08);padding:12px;border-radius:8px;border:1px solid rgba(255,212,59,0.2);">
+          <div style="font-weight:bold;color:#ffd43b;margin-bottom:6px;">📐 Line-of-Sight Distance</div>
+          <p style="margin:0;font-size:11px;color:rgba(234,246,255,0.75);">
+            Distance (km) ≈ 3.57 × √height (meters)<br><br>
+            At 1500m altitude: ~138 km range
+          </p>
+        </div>
+        <div style="background:rgba(77,192,255,0.08);padding:12px;border-radius:8px;border:1px solid rgba(77,192,255,0.2);">
+          <div style="font-weight:bold;color:#4dc0ff;margin-bottom:6px;">⚡ Light Transmission Speed</div>
+          <p style="margin:0;font-size:11px;color:rgba(234,246,255,0.75);">
+            Light travels ~300,000 km/s<br><br>
+            100 km transmission: &lt;1 millisecond
+          </p>
+        </div>
+        <div style="background:rgba(147,51,234,0.08);padding:12px;border-radius:8px;border:1px solid rgba(147,51,234,0.2);">
+          <div style="font-weight:bold;color:#b78dff;margin-bottom:6px;">🔋 Solar Energy Storage</div>
+          <p style="margin:0;font-size:11px;color:rgba(234,246,255,0.75);">
+            Lithium-ion battery systems store 8-12 hours of energy for night mode operation
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FUTURE SCOPE SECTION ============ -->
+    <section class="card future-section">
+      <h2 style="color:#b78dff;margin-top:0;">🚀 Future Scope & Expansion</h2>
+      
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;">
+        <div style="background:rgba(147,51,234,0.1);padding:12px;border-radius:8px;border-left:3px solid #b78dff;">
+          <div style="font-weight:bold;color:#b78dff;margin-bottom:6px;">🌐 Pan-India Expansion</div>
+          <p style="margin:0;font-size:12px;color:rgba(234,246,255,0.8);">
+            Extend mirror network to all 28+ states; create national coverage with 300+ stations
+          </p>
+        </div>
+        <div style="background:rgba(147,51,234,0.1);padding:12px;border-radius:8px;border-left:3px solid #b78dff;">
+          <div style="font-weight:bold;color:#b78dff;margin-bottom:6px;">🤖 AI-Based Sun Tracking</div>
+          <p style="margin:0;font-size:12px;color:rgba(234,246,255,0.8);">
+            Autonomous mirror positioning using machine learning; real-time weather optimization
+          </p>
+        </div>
+        <div style="background:rgba(147,51,234,0.1);padding:12px;border-radius:8px;border-left:3px solid #b78dff;">
+          <div style="font-weight:bold;color:#b78dff;margin-bottom:6px;">📡 National Grid Integration</div>
+          <p style="margin:0;font-size:12px;color:rgba(234,246,255,0.8);">
+            Connect to national renewable energy grid; supply excess power to major cities
+          </p>
+        </div>
+        <div style="background:rgba(147,51,234,0.1);padding:12px;border-radius:8px;border-left:3px solid #b78dff;">
+          <div style="font-weight:bold;color:#b78dff;margin-bottom:6px;">📱 IoT & Smart Monitoring</div>
+          <p style="margin:0;font-size:12px;color:rgba(234,246,255,0.8);">
+            Real-time sensor networks for predictive maintenance and performance analytics
+          </p>
+        </div>
+        <div style="background:rgba(147,51,234,0.1);padding:12px;border-radius:8px;border-left:3px solid #b78dff;">
+          <div style="font-weight:bold;color:#b78dff;margin-bottom:6px;">🌍 International Collaboration</div>
+          <p style="margin:0;font-size:12px;color:rgba(234,246,255,0.8);">
+            Export technology to Himalayan regions in neighboring countries (Nepal, Bhutan)
+          </p>
+        </div>
+        <div style="background:rgba(147,51,234,0.1);padding:12px;border-radius:8px;border-left:3px solid #b78dff;">
+          <div style="font-weight:bold;color:#b78dff;margin-bottom:6px;">🆘 Disaster Communication</div>
+          <p style="margin:0;font-size:12px;color:rgba(234,246,255,0.8);">
+            Use mirror network during natural disasters for emergency power and communications
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FOOTER SECTION ============ -->
+    <section class="card" style="background:rgba(255,255,255,0.01);border-top:2px solid rgba(255,212,59,0.2);">
+      <h2 style="color:#ffd43b;margin-top:0;">🌟 Conclusion</h2>
+      <p style="color:rgba(234,246,255,0.85);font-size:14px;line-height:1.7;margin-bottom:0;">
+        <strong>SuryaNet</strong> represents a transformative and sustainable solution to India's energy and agricultural challenges. By intelligently harnessing our nation's abundant solar resources through advanced mirror technology, we can illuminate the darkest corners of our mountains, empower rural communities, and create a clean energy ecosystem. This project demonstrates that with innovation, strategic planning, and commitment to renewable energy, India can lead the world in sustainable development while securing food and energy security for generations to come.
+      </p>
+      <p style="text-align:center;color:rgba(234,246,255,0.5);margin-top:16px;font-size:12px;border-top:1px solid rgba(255,255,255,0.06);padding-top:12px;">
+        © 2026 SuryaNet – Smart Solar Mirror Network of India | Powering Tomorrow's Sustainable Future
+      </p>
+    </section>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
